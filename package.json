@@ -1,9 +1,9 @@
 {
   "name": "conf-edit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Quickly and easily change .conf properties file",
   "bin":{
-    "conf-edit": "./bin/conf-edit.js"
+    "conf-edit": "./bin/conf-edit"
   },
   "type": "module",
   "main": "src/index",

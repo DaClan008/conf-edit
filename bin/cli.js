@@ -1,7 +1,6 @@
 import arg from "arg";
-import {getSettings, parseConfig, setConfig, setSettings} from '../src/index';
-import {resolve, isAbsolute } from 'path';
-import {writeFile, writeFileSync} from "fs";
+import {getSettings, setSettings} from '../src/index';
+import {writeFileSync} from "fs";
 
 function convertArgsToOptions(receivedArgs) {
     const args = arg({
