@@ -22,7 +22,7 @@ function convertArgsToOptions(receivedArgs) {
         ignoreCase: args['--ignoreCase'],
         extend: args['--extend'],
         properties: args['--property'],
-        dest: args[--dest]
+        dest: args['--dest']
     }
     const functions = ["getsettings", "setsettings", "get", "set"];
 
