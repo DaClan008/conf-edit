@@ -1,0 +1,73 @@
+import arg from "arg";
+import {getSettings, parseConfig, setConfig, setSettings} from '../src/index';
+import {resolve, isAbsolute } from 'path';
+import {writeFile, writeFileSync} from "fs";
+
+function convertArgsToOptions(receivedArgs) {
+    const args = arg({
+        '--property': [String],
+        '--extend': Boolean,
+        "--ignoreCase": Boolean,
+        "--dest": String,
+        "--ignorecase": "--ignoreCas",
+        '-p': '--property',
+        '-e': '--extend',
+        '-i': '--ignoreCase',
+        '-d': '--dest'
+    },
+    {
+        argv: receivedArgs.slice(2)
+    })
+
+    let result = {
+        ignoreCase: args['--ignoreCase'],
+        extend: args['--extend'],
+        properties: args['--property'],
+        dest: args[--dest]
+    }
+    const functions = ["getsettings", "setsettings", "get", "set"];
+
+    args._.forEach(x => {
+        if (functions.includes(x.toLowerCase())) {
+            result.func = x.toLowerCase();
+        } else  result.file = x;
+    })
+    if (args.dest == void 0) args.dest = args.file;
+    return result;
+
+}
+
+function convertToString(obj) {
+    if (obj == void 0) return null;
+    if (typeof obj === 'string') return obj;
+    try {
+        return JSON.parse(obj);
+    } catch (error) {
+    }
+    return null;
+}
+
+export function cli(args) {
+    var a = convertArgsToOptions(args);
+    if (a.func == void 0) {
+        console.log("no proper function has been set.  Options are getSettings, setSettings.");
+        return;
+    }
+    switch (a.func) {
+        case "get":
+        case "getsettings":
+            var settings = getSettings(a.file, a.properties, a.extend, a.ignoreCase);
+            var settingsString  = convertToString(settings);
+            if (settingsString == void 0) return null;
+            if (a.dest == void 0) return settingsString;
+            writeFileSync(a.dest, settingsString);
+            break;
+        default:
+            // set setsettings
+            var newSettings = setSettings(a.file, a.properties, a.extend, a.ignoreCase);
+            if (a.dest == void 0) return newSettings;
+            writeFileSync(a.dest, newSettings);
+            break;
+    }
+
+}
