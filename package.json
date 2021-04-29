@@ -1,11 +1,10 @@
 {
   "name": "conf-edit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Quickly and easily change .conf properties file",
-  "bin":{
+  "bin": {
     "conf-edit": "./bin/conf-edit"
   },
-  "type": "module",
   "main": "src/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,7 +29,6 @@
   },
   "homepage": "https://github.com/DaClan008/conf-edit#readme",
   "dependencies": {
-    "arg": "^5.0.0",
-    "esm": "^3.2.25"
+    "arg": "^5.0.0"
   }
 }

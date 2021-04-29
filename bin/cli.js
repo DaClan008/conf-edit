@@ -1,6 +1,6 @@
-import arg from "arg";
-import {getSettings, setSettings} from '../src/index';
-import {writeFileSync} from "fs";
+const arg = require("arg");
+const {getSettings, setSettings} = require('../src/index');
+const {writeFileSync} = require("fs");
 
 function convertArgsToOptions(receivedArgs) {
     const args = arg({
@@ -46,7 +46,7 @@ function convertToString(obj) {
     return null;
 }
 
-export function cli(args) {
+function cli(args) {
     var a = convertArgsToOptions(args);
     if (a.func == void 0) {
         console.log("no proper function has been set.  Options are getSettings, setSettings.");
@@ -70,3 +70,7 @@ export function cli(args) {
     }
 
 }
+
+module.exports = {
+    cli
+};

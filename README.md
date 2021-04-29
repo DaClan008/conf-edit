@@ -19,7 +19,7 @@ There are 4 main functions exposed:
 Get the current settings from a .conf file.  This can also be limited to a specified set of properties.
 
 ```js
-import { getSettings } from 'conf-edit';
+const { getSettings } = require('conf-edit');
 
 const confFile = 'some/relative/or/absolute/file.conf';
 const limits = [
@@ -86,7 +86,7 @@ Returns a new config string based on a config string provieded at a file locatio
 In these examples the same .conf file is used than specified above.
 
 ```js
-import { setSettings } from 'conf-edit';
+const { setSettings }= require('conf-edit');
 
 const confFile = 'some/relative/or/absolute/file.conf';
 const newValues = {

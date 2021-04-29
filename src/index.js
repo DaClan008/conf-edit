@@ -1,5 +1,5 @@
-import {resolve, isAbsolute} from "path";
-import {lstatSync, readFileSync} from "fs";
+const {resolve, isAbsolute} = require("path");
+const {lstatSync, readFileSync} = require("fs");
 const propertySplitReg = /^ *([^ #]+)([ =]+(.+))?/
 
 function parseString(stringValue, isArray = false) {
@@ -86,7 +86,7 @@ function buildDefaultResult(defaultProperties) {
  * @param {boolean} extend If false, only properties defined in defaultProperties will be included in the result object, else additional properties will be added.
  * @returns {object} Of properties as set on .conf File
  */
-export function getSettings(confFile, defaultProperties, extend, ignoreCase = true) {
+function getSettings(confFile, defaultProperties, extend, ignoreCase = true) {
     if (confFile == void 0 || confFile === "") return {};
     
     defaultProperties = defaultProperties == void 0 ? [] : parseString(defaultProperties, true);
@@ -105,7 +105,7 @@ export function getSettings(confFile, defaultProperties, extend, ignoreCase = tr
  * @param {*} ignoreCase 
  * @returns 
  */
-export function setSettings(confFile, newValues, extend, ignoreCase = true) {
+function setSettings(confFile, newValues, extend, ignoreCase = true) {
     if (confFile == void 0 || confFile === "") return "";
 
     newValues = parseString(newValues);
@@ -124,7 +124,7 @@ export function setSettings(confFile, newValues, extend, ignoreCase = true) {
  * @param {boolean} ignoreCase If true property case will be ignored.  Defautl = true
  * @returns {object} Settings object
  */
-export function parseConfig(configFile, defaultProperties, extend, ignoreCase = true) {
+function parseConfig(configFile, defaultProperties, extend, ignoreCase = true) {
     if (defaultProperties == void 0) defaultProperties = [];
     let searchStringList = [];
     
@@ -157,7 +157,7 @@ export function parseConfig(configFile, defaultProperties, extend, ignoreCase = 
  * @param {bool} ignoreCase If set ignores case between property names as conteined in the propertyValues object and configFile
  * @returns {string}
  */
-export function setConfig(configFile, propertyValues, extend, ignoreCase = true) {
+function setConfig(configFile, propertyValues, extend, ignoreCase = true) {
     if (propertyValues == void 0) return configFile;
     let searchStringList = [];
     
@@ -192,4 +192,11 @@ export function setConfig(configFile, propertyValues, extend, ignoreCase = true)
         });
     }
     return newLines.join('\n');
+}
+
+module.exports = {
+    setConfig,
+    getSettings,
+    setSettings,
+    parseConfig
 }
