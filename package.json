@@ -1,6 +1,6 @@
 {
   "name": "conf-edit",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Quickly and easily change .conf properties file",
   "bin": {
     "conf-edit": "./bin/conf-edit"

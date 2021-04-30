@@ -1,6 +1,6 @@
 const arg = require("arg");
 const {getSettings, setSettings} = require('../src/index');
-const {writeFileSync, copyFileSync} = require("fs");
+const {writeFileSync} = require("fs");
 
 function convertArgsToOptions(receivedArgs) {
     const args = arg({
@@ -74,4 +74,3 @@ function cli(args) {
 module.exports = {
     cli
 };
-cli(process.argv);
