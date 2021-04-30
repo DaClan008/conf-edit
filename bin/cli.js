@@ -1,6 +1,6 @@
 const arg = require("arg");
 const {getSettings, setSettings} = require('../src/index');
-const {writeFileSync} = require("fs");
+const {writeFileSync, copyFileSync} = require("fs");
 
 function convertArgsToOptions(receivedArgs) {
     const args = arg({
@@ -8,7 +8,7 @@ function convertArgsToOptions(receivedArgs) {
         '--extend': Boolean,
         "--ignoreCase": Boolean,
         "--dest": String,
-        "--ignorecase": "--ignoreCas",
+        "--ignorecase": "--ignoreCase",
         '-p': '--property',
         '-e': '--extend',
         '-i': '--ignoreCase',
@@ -40,7 +40,7 @@ function convertToString(obj) {
     if (obj == void 0) return null;
     if (typeof obj === 'string') return obj;
     try {
-        return JSON.parse(obj);
+        return JSON.stringify(obj);
     } catch (error) {
     }
     return null;
@@ -58,13 +58,13 @@ function cli(args) {
             var settings = getSettings(a.file, a.properties, a.extend, a.ignoreCase);
             var settingsString  = convertToString(settings);
             if (settingsString == void 0) return null;
-            if (a.dest == void 0) return settingsString;
+            if (a.dest == void 0) return console.log(settingsString);
             writeFileSync(a.dest, settingsString);
             break;
         default:
             // set setsettings
             var newSettings = setSettings(a.file, a.properties, a.extend, a.ignoreCase);
-            if (a.dest == void 0) return newSettings;
+            if (a.dest == void 0) return console.log(newSettings);
             writeFileSync(a.dest, newSettings);
             break;
     }
@@ -74,3 +74,4 @@ function cli(args) {
 module.exports = {
     cli
 };
+cli(process.argv);

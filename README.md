@@ -182,6 +182,70 @@ OR
 | --ignoreCase | --ignorecase / -i | boolean | Sets whether case should be ignored or not.  Refer to examples under [getSettings](#getsettings) or [setSettings](#setsettings).
 | --property | -p | string[] | Is used for both getSettings and setSettings.  Where getSettings should only include the property name, the setSettings property value can have a property value pair (i.e. property value OR property=value). |
 
+> **NOTE** unfortunately I have not yet extended the destination function to automatically create folders when outputting to a file.  Therefore destination is limited to exiting folders.
+
+### Examples
+
+Given the following .conf file (location ./src/tmp.conf from where console command is run):
+> Note if the console does not run by calling conf-edit, try prefixing it with npx conf-edit ...
+```conf
+property1 some value
+property2 some value2
+# exlcudedProperty exclude value
+```
+
+The following are some get examples
+
+GET examples
+
+```cmd
+conf-edit ./bin/cli.js get ./src/tmp.conf 
+
+> output {"property1":"some value","property2":"some value2"}
+
+conf-edit ./bin/cli.js getSettings --property 'PROPERTY1' --property 'nonexist prop' ./src/tmp.conf 
+
+> output {"nonexist":"prop","property1":"some value"}
+
+conf-edit ./bin/cli.js getsEtTiNgS --property 'PROPERTY1' --property 'nonexist prop' ./src/tmp.conf -e
+
+> output {"nonexist":"prop","property1":"some value","property2":"some value2"}
+
+```
+
+SET examples
+
+```cmd
+
+
+conf-edit ./bin/cli.js set -p 'property1 new' -p 'nonexistnig prop' ./src/tmp.conf
+
+> output
+    property1 new
+    property2 some value2
+    # exlcudedProperty exclude value
+
+conf-edit ./bin/cli.js setsettings -p 'property1 new' -p 'nonexistnig prop' ./src/tmp.conf --extend
+
+> output:
+    property1 new
+    property2 some value2
+    # exlcudedProperty exclude value
+    nonexistnig prop
+
+conf-edit ./bin/cli.js setSettings -p 'property1 new' --property 'exlcudedProperty go live' ./src/tmp.conf
+
+> output:
+    property1 new
+    property2 some value2
+    exlcudedProperty go live
+
+conf-edit ./bin/cli.js setSettings -p 'property1 new' --property 'exlcudedProperty go live' ./src/tmp.conf -d ./log.txt
+
+> same result as above, but printed to log.txt
+
+```
+
 ## Note
 
 Project has not been fully tested and feel free to contribute.  Project has been completed quickly in order to proceed with further projects.  I would like to extend this project later on to also be able to Parse and Compile .yml files.
