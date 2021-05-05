@@ -181,6 +181,7 @@ OR
 | --extend | -e | boolean | Sets the extend property to true or false if needs be.
 | --ignoreCase | --ignorecase / -i | boolean | Sets whether case should be ignored or not.  Refer to examples under [getSettings](#getsettings) or [setSettings](#setsettings).
 | --property | -p | string[] | Is used for both getSettings and setSettings.  Where getSettings should only include the property name, the setSettings property value can have a property value pair (i.e. property value OR property=value). |
+| --destination | -d | The destination where the file will be saved to.  If no destination is given the result will be send to console. |
 
 > **NOTE** unfortunately I have not yet extended the destination function to automatically create folders when outputting to a file.  Therefore destination is limited to exiting folders.
 
